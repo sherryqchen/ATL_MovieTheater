@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+<html lang="en">
+
+{% block content %}
+<div class="content-section">
+    <form method="post" action="" title="Create Theater">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                Create Theater
+            </legend>
+            <row>
+                <div class="form-group col-md-6">
+                    {{ render_field(form.theater_name) }}
+                    {{ render_field(form.company_name) }}
+                </div>
+            </row>
+            <div class="form-group col-md-10">
+                {{ render_field(form.street_addr) }}
+            </div>
+            <row>
+                <div class="form-group col-md-4">
+                    {{ render_field(form.city) }}
+                    {{ render_field(form.state) }}
+                    {{ render_field(form.zipcode) }}
+                </div>
+            </row>
+            <div class="form-group col-md-4">
+                {{ render_field(form.capacity) }}
+                {{ render_field(form.manager) }}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.create(class="btn btn-outline-info") }}
+
+        </div>
+    </form>
+    <form action="/admin_manage_company" method="get">
+        <button class="btn btn-outline-info">Back</button>
+    </form>
+</div>
+<script>
+    let company_name_select = document.getElementById('Company Name');
+    let manager_select = document.getElementById('Manager');
+    company_name_select.onchange = function(){
+        company= company_name_select.value;
+        fetch('/manager_not_manage_theater/' + company).then(function(response) {
+            response.json().then(function(data) {
+            let optionHTML = '';
+                for (let manager of data.managers){
+                    optionHTML += '<option value="' + manager.id + '">' + manager.name + '</option>';
+
+                }
+                manager_select.innerHTML = optionHTML;
+            })
+        });
+
+    }
+</script>
+{% endblock content %}
+
+</html>

@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+<html lang="en">
+
+{% block content %}
+<div class="content-section">
+    <form method="post" action="" title="Create Movie">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                Create Movie
+            </legend>
+            <div class="form-group">
+                {{ render_field(form.movie_name) }}
+            </div>
+            <div class="form-group">
+
+                {{ render_field(form.duration)}}
+                {{ render_field(form.release_date) }}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.create(class="btn btn-outline-info") }}
+
+        </div>
+    </form>
+    <form action="/login" method="get">
+        <button class="btn btn-outline-info">Back</button>
+    </form>
+</div>
+{% endblock content %}

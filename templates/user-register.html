@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+<html lang="en">
+
+{% block content %}
+<div class="content-section">
+    <form method="post" action="" title="Login">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                User Registration
+            </legend>
+            <div class="form-group">
+                {{ render_field(form.firstname)}}
+            </div>
+            </legend>
+            <div class="form-group">
+                {{ render_field(form.lastname)}}
+            </div>
+            </legend>
+            <div class="form-group">
+                {{ render_field(form.username)}}
+            </div>
+            <div class="form-group">
+                {{ render_field(form.password)}}
+            </div>
+            <div class="form-group">
+                {{ render_field(form.confirm_password)}}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+        <!-- <form action="/about" method="get">
+            <button class="btn btn-outline-info">Back</button>
+        </form> -->
+    </form>
+
+    <form action="/register_options" method="get">
+            <button class="btn btn-outline-info">Back</button>
+    </form>
+
+</div>
+
+<div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Login In</a>
+        </small>
+</div>
+{% endblock content %}

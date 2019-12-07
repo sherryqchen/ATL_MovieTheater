@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+<html lang="en">
+{% block content %}
+<div class="content-section">
+    <form method="post" action="" title="Login">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <legend class="border-bottom mb-4">
+                Customer Registration
+            </legend>
+            <div class="form-group">
+                {{ render_field(form.firstname)}}
+            </div>
+            </legend>
+            <div class="form-group">
+                {{ render_field(form.lastname)}}
+            </div>
+            </legend>
+            <div class="form-group">
+                {{ render_field(form.username)}}
+            </div>
+            <div class="form-group">
+                {{ render_field(form.password)}}
+            </div>
+            <div class="form-group">
+                {{ render_field(form.confirm_password)}}
+            </div>
+            <div class="form-group">
+                <p> Credit Card (Maximum 5)</p>
+                <style>
+                    button {
+                      background-color: #008CBA;
+                      border: none;
+                      color: white;
+                      padding: 5px 10px;
+                      text-align: center;
+                      text-decoration: none;
+                      display: inline-block;
+                      font-size: 15px;
+                      margin: 4px 2px;
+                      cursor: pointer;
+                    }
+                </style>
+
+               <table id = "myTable">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                 </table>
+                <script>
+                    var count = 0;
+                    var list = new Array();
+                    function myCreateFunction(minlength, maxlength) {
+                        if(count < 5) {
+                          var table = document.getElementById("myTable");
+                          var userInput = document.getElementById('userInput').value;
+                          var row = table.insertRow(count);
+                          var cell1 = row.insertCell(0);
+                          var cell2 = row.insertCell(1);
+                          if(userInput.length < minlength || userInput.length > maxlength){
+                            alert("Please input the credit card number with " +maxlength+ " characters");
+                            <!--alert("Please input the credit card number between " +minlength+ " and " +maxlength+ " characters");-->
+                            return;
+                          } else {
+                            cell1.innerHTML = userInput;
+                            list.push(userInput);
+                          }
+                          cell2.innerHTML = '<button type="button" onclick="myDeleteFunction(this)">Remove</button>'
+                        }
+                        else {
+                            alert("You can have at most 5 credit cards!")
+                            return;
+                        }
+                    count++;
+                    document.getElementById('boldStuff').innerHTML = count;
+                    return list;
+                    }
+
+                    function myDeleteFunction(o) {
+                        var i=o.parentNode.parentNode.rowIndex;
+                        list.splice(i, 1);
+                        document.getElementById("myTable").deleteRow(i);
+                        count--;
+                        document.getElementById('boldStuff').innerHTML = count;
+                        return list;
+                    }
+                    function addAllCreditCard() {
+                        document.querySelector("#userInput").value = "";
+                        list.forEach((credit) => {
+                            document.querySelector("#userInput").value += (credit + ",");
+                        })
+                    }
+                </script>
+                <p> count:<b id='boldStuff'> --</b></p>
+                <input name ="input" type='text' id="userInput" maxlength="16" />
+                <button type="button" onclick='myCreateFunction(16, 16)'>Add</button>
+             </div>
+
+            </div>
+
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" onclick="addAllCreditCard()">Register</button>
+        </div>
+    </form>
+
+    <form action="/register_options" method="get">
+            <button class="btn btn-outline-info">Back</button>
+    </form>
+</div>
+
+<div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Log In</a>
+        </small>
+</div>
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+<html lang="en">
+{% block content %}
+
+<div class="content-section">
+    <form method="post" action="" title="Visit History">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                Schedule Movie
+            </legend>
+            <div class="form-group col-md-6"> {{ render_field(form.name) }} </div>
+            <div class="form-group col-md-6"> {{ render_field(form.release_date) }} </div>
+            <div class="form-group col-md-6"> {{ render_field(form.play_date) }} </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.add(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+
+<form action="/login" method="get"><button class="btn btn-outline-info">Back</button></form>
+
+<script>
+    let movie_name_select = document.getElementById('movie_name');
+    let date_select = document.getElementById('date');
+    movie_name_select.onchange = function(){
+        movie= movie_name_select.value;
+        fetch('/manager_schedule_movie_release_date/' + movie).then(function(response) {
+            response.json().then(function(data) {
+            let optionHTML = '';
+                for (let date of data.dates){
+                    optionHTML += '<option value="' + date.id + '">' + date.name + '</option>';
+                }
+                date_select.innerHTML = optionHTML;
+            })
+        });
+
+    }
+</script>
+
+
+{% endblock content %}
+

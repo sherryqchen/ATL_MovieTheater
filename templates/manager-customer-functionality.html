@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+ <!-- <fieldset class="form-group">
+     <legend class="border-bottom mb-4">registerOptions</legend>
+ </fieldset>> -->
+</br>
+</br>
+    
+    <h1><pre>Manager-Customer Functionality</pre></h1>
+    <style>
+        div {
+            top: 0%;
+            left: 0%;
+            text-align: center;
+        }
+    </style>
+    <div class="col-md-12">
+        <form action="/manager_theater_overview" method="get">
+            <button class="btn btn-outline-info btn-block">Theater Overview</button>
+        </form>
+        <br><br>
+        <form action="/customer_explore_movie" method="get">
+            <button class="btn btn-outline-info btn-block">Explore Movie</button>
+        </form>
+        <br><br>
+        <form action="/manager_schedule_movie" method="get">
+            <button class="btn btn-outline-info btn-block">Schedule Movie</button>
+        </form>
+        <br><br>
+        <form action="/user_explore_theater" method="get">
+            <button class="btn btn-outline-info btn-block">Explore Theater</button>
+        </form>
+        <br><br>
+        <form action="/user_visit_history" method="get">
+            <button class="btn btn-outline-info btn-block">Visit History</button>
+        </form>
+        <br><br>
+        <form action="/customer_view_history" method="get">
+            <button class="btn btn-outline-info btn-block">View History</button>
+        </form>
+        <!-- <br><br> -->
+        <br>
+        <form action="/home" method="get">
+            <button class="btn btn-outline-info btn-block">Back</button>
+        </form>
+    </div>
+{% endblock content %}
+

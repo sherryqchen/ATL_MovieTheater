@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+ <!-- <fieldset class="form-group">
+     <legend class="border-bottom mb-4">registerOptions</legend>
+ </fieldset>> -->
+</br>
+</br>
+    <!-- <h1>Register Navigation</h1> -->
+    <h1><pre>Register Navigation</pre></h1>
+    <style>
+        div {
+            top: 0%;
+            left: 0%;
+            text-align: center;
+        }
+    </style>
+    <div class="col-md-12">
+        <form action="/user_register" method="get">
+            <button class="btn btn-outline-info btn-block">User Only</button>
+        </form>
+        <br><br>
+        <form action="/customer_register" method="get">
+            <button class="btn btn-outline-info btn-block">Customer Only</button>
+        </form>
+        <br><br>
+        <form action="/manager_register" method="get">
+            <button class="btn btn-outline-info btn-block">Manager Only</button>
+        </form>
+        <br><br>
+        <form action="/manager_customer_register" method="get">
+            <button class="btn btn-outline-info btn-block">Manager-Customer</button>
+        </form>
+        <br><br>
+        <form action="/home" method="get">
+            <button class="btn btn-outline-info btn-block">Back</button>
+        </form>
+    </div>
+{% endblock content %}
+

@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <h1>Company Detail</h1>
+    <h4>Name</h4>
+    {{company_name}}
+    <br>
+
+    <h4>Employees</h4>
+    <ul>
+    {% for name in employee_names %}
+        <li>{{name[0]}} {{name[1]}}</li>    
+    {% endfor %}
+    </ul>
+
+    <br>
+
+    <h4>Theaters</h4>
+
+    <table class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Manager</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Capacity</th>
+            </tr>
+        </thead>
+        {% for data in theaters %}
+        <tr>
+        {% for i in data %}
+            <td> {{i}} </td>  
+        {% endfor %}
+        </tr> 
+        {% endfor %}
+    </table>
+
+    <form action="/login" method="get">
+        <button class="btn btn-outline-info">Back</button>
+    </form>
+</div>
+{% endblock content %}

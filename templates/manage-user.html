@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+<html lang="en">
+{% block content %}
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" -->
+  <!-- integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
+<!-- <script src="jquery.tablesort.min.js"></script> -->
+<script src="{{ url_for('static', filename='jquery.tablesort.js') }}"></script>
+<script src="{{ url_for('static', filename='jquery.tablesort.min.js') }}"></script>
+
+<script type="text/javascript">
+
+  $(function () {    
+    $.noConflict();
+    $('table').tablesort().data('tablesort');
+  });
+</script>
+
+<div class="content-section">
+  <form method="post" action="" title="Manage User">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">
+        Manage User
+      </legend>
+
+      <div class="form-group">
+        {{ render_field(form.username)}}
+      </div>
+      <div class="form-group">
+        {{ render_field(form.status)}}
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">{{ render_field(form.filter) }}</div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="content-section">
+    <form action="/admin_manage_user", method="post">
+      <div class="row">
+        <button class="btn btn-outline-info", name="approve">Approve</button>
+        <button class="btn btn-outline-info", name="decline">Decline</button>
+        <!-- <div class="form-group col-md-6">{{ form.submit(class="btn btn-outline-info")}}</div>
+        <div class="form-group col-md-6">{{ form.submit(class="btn btn-outline-info")}}</div> -->
+      </div>
+      <table id="visit history" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Credit Card Count</th>
+            <th>User Type</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        {% if data_details and resultLength > 0: %}
+            {% for i in range(resultLength) %}
+            <tr>
+                <td><input type="radio" value="{{ data_details[i][0] }}" name='table_index'>   {{ data_details[i][0] }}</td>
+                <td>{{data_details[i][3]}}</td>
+                <td>{{data_details[i][1]}}</td>
+                <td>{{data_details[i][2]}}</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+
+          <!-- <tr>
+            <td>cwilson</td>
+            <td>3</td>
+            <td>customer</td>
+            <td>Approved</td>
+          </tr>
+          <tr>
+            <td>jasonlee</td>
+            <td>0</td>
+            <td>user</td>
+            <td>Declined</td>
+          </tr>
+          <tr>
+            <td>jjohnson</td>
+            <td>0</td>
+            <td>manager</td>
+            <td>Pending</td>
+          </tr> -->
+
+
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <form action="/about" method="get">
+    <button class="btn btn-outline-info">Back</button>
+  </form>
+</div>
+
+{% endblock content %}
